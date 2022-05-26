@@ -4,9 +4,7 @@ import { supabase } from '../utils/supabaseClient'
 export default function Account({ session }) {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
-  const [website, setWebsite] = useState(null)
-  const [avatar_url, setAvatarUrl] = useState(null)
-
+  
   useEffect(() => {
     getProfile()
   }, [session])
@@ -66,10 +64,10 @@ export default function Account({ session }) {
   }
 
   return (
-    <div className="form-widget">
+    <div className="flex items-center flex-col bg-white p-5 w-[450px] space-y-10 container shadow-lg border border-transparent">
       <div>
         <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
+        <input id="email" className='' type="text" value={session.user.email} disabled />
       </div>
       <div>
         <label htmlFor="username">Name</label>
@@ -90,9 +88,9 @@ export default function Account({ session }) {
         />
       </div>
 
-      <div>
+      <div className='flex flex-col'>
         <button
-          className="button block primary"
+          className="bg-green-500 p-5 text-white rounded-lg"
           onClick={() => updateProfile({ username, website, avatar_url })}
           disabled={loading}
         >
@@ -101,7 +99,7 @@ export default function Account({ session }) {
       </div>
 
       <div>
-        <button className="button block" onClick={() => supabase.auth.signOut()}>
+        <button className="bg-red-500 p-5 text-white rounded-lg" onClick={() => supabase.auth.signOut()}>
           Sign Out
         </button>
       </div>
